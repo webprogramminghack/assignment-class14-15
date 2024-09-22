@@ -5,7 +5,9 @@
 // No need to use recursion
 
 // ------- start coding here -------
-
+type Transformer<T extends { [P in any]: any }> = {
+  [K in keyof T]: T[K] extends infer R ? R : never;
+}[keyof T];
 // ------- don't change the code below -------
 type Details = {
   person: {
