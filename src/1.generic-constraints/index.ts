@@ -4,7 +4,17 @@
 // You can remove the readonly modifier from the mapped type by using -readonly
 
 // ------- start coding here -------
-
+function mapObjectProperties<
+  S extends Record<string, any>,
+  M extends Record<string, keyof S>
+>(source: S, mapping: M): { -readonly [K in keyof M]: S[M[K]] } {
+  const result = {} as { -readonly [K in keyof M]: S[M[K]] };
+  for (const key in mapping) {
+    const sourceKey = mapping[key];
+    result[key] = source[sourceKey];
+  }
+  return result;
+}
 // ------- don't change the code below -------
 const user = {
   userId: 123, // original key is userId
@@ -46,3 +56,7 @@ const transformedUser2 = mapObjectProperties(user, mapping2);
 // }
 
 const transformedUser3 = mapObjectProperties(user, mapping3); // should produce error since 'doesntExist' is not a key of user
+
+// console.log(transformedUser1);
+// console.log(transformedUser2);
+// console.log(transformedUser3);
