@@ -12,10 +12,11 @@ function mapObjectProperties<
   S extends Record<string, any>,
   M extends Record<string, keyof S>
 >(source: S, mapping: M): Mapping<S, M> {
-  const result = {} as Mapping<S, M>;
+  const result = { ...source } as any;
   for (const key in mapping) {
     const sourceKey = mapping[key];
     result[key] = source[sourceKey];
+    delete result[sourceKey];
   }
   return result;
 }
@@ -61,6 +62,6 @@ const transformedUser2 = mapObjectProperties(user, mapping2);
 
 const transformedUser3 = mapObjectProperties(user, mapping3); // should produce error since 'doesntExist' is not a key of user
 
-// console.log(transformedUser1);
-// console.log(transformedUser2);
-// console.log(transformedUser3);
+console.log(transformedUser1);
+console.log(transformedUser2);
+console.log(transformedUser3);
