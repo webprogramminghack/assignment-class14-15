@@ -4,11 +4,15 @@
 // You can remove the readonly modifier from the mapped type by using -readonly
 
 // ------- start coding here -------
+type Mapping<S, M extends Record<string, keyof S>> = {
+  -readonly [K in keyof M]: S[M[K]];
+} & Omit<S, M[keyof M]>;
+
 function mapObjectProperties<
   S extends Record<string, any>,
   M extends Record<string, keyof S>
->(source: S, mapping: M): { -readonly [K in keyof M]: S[M[K]] } {
-  const result = {} as { -readonly [K in keyof M]: S[M[K]] };
+>(source: S, mapping: M): Mapping<S, M> {
+  const result = {} as Mapping<S, M>;
   for (const key in mapping) {
     const sourceKey = mapping[key];
     result[key] = source[sourceKey];
