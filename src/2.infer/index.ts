@@ -31,17 +31,18 @@ const items = [
 // Use conditional type with infer to get the color and code type, that's how you can prevent the non-available color and code from being passed to the function
 
 // ------- start coding here -------
-function getAvailableItems(color: string, code: string): string[] {
-  const result = items.filter(item => {
-    const elements = item.split('-');
-    // console.log(elements);
-    if (elements[1] === color && elements[2] === code) {
-      return item
-    }    
-  })
-  
-  return result;
+type ExtractItem<S extends string> =
+  S extends `${string}-${infer Color}-${infer Code}`
+    ? { color: Color; code: Code }
+    : never;
+
+function getAvailableItems<
+  C extends ExtractItem<(typeof items)[number]>['color'],
+  S extends ExtractItem<(typeof items)[number]>['code']
+>(color: C, code: S): (typeof items)[number][] {
+  return items.filter((item) => item.includes(`${color}-${code}`));
 }
+
 // ------- don't change the code below -------
 const item1 = getAvailableItems('red', '400'); // Should return ['text-red-400', 'bg-red-400']
 console.log(item1);

@@ -20,6 +20,7 @@ function mapObjectProperties<
   }
   return result;
 }
+
 // ------- don't change the code below -------
 const user = {
   userId: 123, // original key is userId
