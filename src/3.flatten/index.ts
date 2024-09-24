@@ -5,9 +5,12 @@
 // No need to use recursion
 
 // ------- start coding here -------
-type Transformer<T extends { [P in any]: any }> = {
-  [K in keyof T]: T[K] extends infer R ? R : never;
-}[keyof T];
+type Transformer<T extends Record<string, any>> = (
+  T extends any ? (x: T[keyof T]) => void : never
+) extends (x: infer R) => void
+  ? R
+  : never;
+
 // ------- don't change the code below -------
 type Details = {
   person: {

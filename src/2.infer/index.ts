@@ -33,18 +33,23 @@ const items = [
 // ------- start coding here -------
 type Items = (typeof items)[number];
 
-type GetColor = ItemColor<Items>;
-type GetCode = ItemCode<Items>;
+// type GetColor = ItemColor<Items>;
+// type GetCode = ItemCode<Items>;
 
-type ItemColor<Item extends string> =
-  Item extends `${string}-${infer Color}-${string}` ? Color : never;
-type ItemCode<Item extends string> =
-  Item extends `${string}-${string}-${infer Code}` ? Code : never;
+// type ItemColor<Item extends string> =
+//   Item extends `${string}-${infer Color}-${string}` ? Color : never;
+// type ItemCode<Item extends string> =
+//   Item extends `${string}-${string}-${infer Code}` ? Code : never;
 
-function getAvailableItems<Color extends GetColor, Code extends GetCode>(
-  color: Color,
-  code: Code
-): Items[] {
+type ColorCode<S extends string> =
+  S extends `${string}-${infer Color}-${infer Code}`
+    ? { color: Color; code: Code }
+    : never;
+
+function getAvailableItems<
+  Color extends ColorCode<Items>['color'],
+  Code extends ColorCode<Items>['code']
+>(color: Color, code: Code): Items[] {
   return items.filter((item) => item.includes(`${color}-${code}`));
 }
 // ------- don't change the code below -------
