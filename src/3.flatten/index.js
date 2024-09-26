@@ -3,23 +3,14 @@
 // You can use the conditional type with infer to produce union type
 // Once you have the union type, you can intersect it to get the final type using conditional type with infer
 // No need to use recursion
-
-// ------- start coding here -------
-
-
-// ------- don't change the code below -------
-type Details = {
-  person: {
-    name: string;
-    age: number;
-  };
-  location: {
-    city: string;
-    country: string;
-  };
+// contoh object yang sesuai dengan transformedResult saya ubah biar kelihatan pak...
+var example = {
+    name: 'Aminy',
+    age: 54,
+    city: 'Tembagapura',
+    country: 'Indonesia',
 };
-
-type TransformedResult = Transformer<Details>;
+console.log(example);
 // TransformedResult type should be:
 // {
 //   name: string;

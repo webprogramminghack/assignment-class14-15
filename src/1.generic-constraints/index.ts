@@ -4,6 +4,24 @@
 // You can remove the readonly modifier from the mapped type by using -readonly
 
 // ------- start coding here -------
+//Definiskan fungsi generik `mapObjectProperties`
+function mapObjectProperties<
+  S extends object,
+  M extends Record<keyof M, keyof S>
+>(
+  source: S,
+  mapping: M
+): {
+  [K in keyof M]: S[M[K]];
+} {
+  const result = {} as any; // Inisialisasikan objek kosong untuk menyimpan hasil
+  for (const key in mapping) {
+    const mappedKey = mapping[key];
+    result[key] = source[mappedKey];
+    // Pemetaan properti berdasarkan objek pemetaan
+  }
+  return result; // kembalikan objek yang telah diubah
+}
 
 // ------- don't change the code below -------
 const user = {
@@ -30,6 +48,7 @@ const mapping3 = {
 } as const;
 
 const transformedUser1 = mapObjectProperties(user, mapping1);
+console.log(transformedUser1);
 // type should be:
 // const transformedUser1: {
 //   id: number;
@@ -38,6 +57,7 @@ const transformedUser1 = mapObjectProperties(user, mapping1);
 // }
 
 const transformedUser2 = mapObjectProperties(user, mapping2);
+console.log(transformedUser2);
 // type should be:
 // const transformedUser2: {
 //   id: number;

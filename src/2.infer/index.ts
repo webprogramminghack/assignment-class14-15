@@ -32,6 +32,31 @@ const items = [
 
 // ------- start coding here -------
 
+type Item = (typeof items)[number];
+// Menentukan warna yang tersedia beserta kode yang sesuai
+type ColorCodes = {
+  red: '400' | '500' | '600';
+  green: '400' | '500' | '600';
+  blue: '400' | '500' | '600';
+};
+
+type AvailableColors = keyof ColorCodes;
+
+// Membuat tipe untuk item yang valid berdasarkan warna dan ukuran
+type AvailableItems<
+  C extends AvailableColors,
+  S extends ColorCodes[C]
+> = Extract<Item, `${`text-${C}` | `bg-${C}`}-${S}`>[];
+
+function getAvailableItems<C extends AvailableColors, S extends ColorCodes[C]>(
+  color: C,
+  code: S
+): AvailableItems<C, S> {
+  const prefix = `text-${color}-${code}`;
+  const bgPrefix = `bg-${color}-${code}`;
+
+  return [prefix, bgPrefix] as AvailableItems<C, S>;
+} 
 // ------- don't change the code below -------
 const item1 = getAvailableItems('red', '400'); // Should return ['text-red-400', 'bg-red-400']
 console.log(item1);
