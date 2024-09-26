@@ -30,6 +30,9 @@ Below is the initial code provided:
 // Make the `Transformer` generic type that will transform the `Details` type
 
 // ------- start coding here -------
+type Transformer<T> = {
+  [K in keyof T]: T[K] extends object ? Transformer<T[K]> : T[K];
+}[keyof T];
 
 // ------- don't change the code below -------
 
@@ -52,4 +55,54 @@ type TransformedResult = Transformer<Details>;
 //   city: string;
 //   country: string;
 // }
+```
+
+# Mengubah Tipe Objek Bersarang di TypeScript
+
+## Tujuan
+
+Tujuan dari tugas ini adalah mempelajari cara mengubah tipe objek bersarang di TypeScript menggunakan tipe generik dan manipulasi tipe. Anda akan menerapkan tipe `Transformer` yang akan mengambil properti tipe objek yang sangat bertingkat dan menggabungkannya menjadi satu tipe datar.
+
+## Petunjuk
+
+### Uraian Masalah
+
+Anda diberikan tipe `Detail` yang berisi properti bertingkat. Tugas Anda adalah membuat **tipe generik** yang disebut `Transformer` yang:
+
+- **Mengubah** tipe seperti `Detail` dengan meratakan struktur bertingkat.
+- Menggabungkan semua properti dari objek bersarang menjadi satu tipe datar.
+- Menggunakan fitur TypeScript seperti:
+  - Tipe bersyarat
+  - menyimpulkan
+
+Tujuannya adalah untuk membuat transformasi tipe yang menghasilkan objek rata yang berisi semua properti dari struktur bersarang. Namun, karena ini hanyalah tugas sederhana, tidak perlu menggunakan rekursi.
+
+### Buat Tipe Generik `Transformer`
+
+Tugas Anda adalah mengimplementasikan tipe generik `Transformer` yang akan mengubah tipe Detail.
+
+### Kode Awal
+
+Di bawah ini adalah kode awal yang diberikan:
+
+```naskah ketikan
+// Buat tipe generik `Transformer` yang akan mengubah tipe `Detail`
+
+// ------- mulai coding di sini -------
+ketik Transformator<T> = {
+  [K di keyof T]: T[K] memperluas objek? Transformator<T[K]> : T[K];
+}[kunci T];
+
+// ------- jangan ubah kode di bawah ini -------
+
+ketik Detail = {
+  orang: {
+    nama: tali;
+    usia: nomor;
+  };
+  lokasi: {
+    kota: tali;
+    negara: tali;
+  };
+};
 ```

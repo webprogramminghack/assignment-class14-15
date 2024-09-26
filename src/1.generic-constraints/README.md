@@ -93,3 +93,99 @@ const transformedUser2 = mapObjectProperties(user, mapping2);
 
 const transformedUser3 = mapObjectProperties(user, mapping3); // should produce error since 'doesntExist' is not a key of user
 ```
+
+# Fungsi Generik TypeScript untuk Pemetaan Properti Objek
+
+## Tujuan
+
+Tujuan dari tugas ini adalah untuk memahami dan mengimplementasikan **TypeScript generik** dengan **tipe yang dipetakan** dan **batasan**. Anda akan membuat fungsi generik yang memetakan properti dari objek sumber ke objek baru menggunakan objek pemetaan, untuk memastikan keamanan jenis.
+
+## Petunjuk
+
+Anda ditugaskan untuk mengimplementasikan fungsi `mapObjectProperties` menggunakan **TypeScript generik**. Fungsi ini akan mengambil dua argumen:
+
+1. **Objek sumber (`S`)**: Objek yang propertinya akan dipetakan.
+2. **Pemetaan objek (`M`)**: Objek yang menentukan bagaimana properti dari sumber harus diganti namanya atau dipetakan ke objek baru.
+
+### Contoh
+
+Diberikan objek sumber seperti ini:
+
+```ts
+pengguna konstan = {
+  ID pengguna: 123,
+  nama pengguna: 'JohnDoe',
+  umur pengguna: 30,
+};
+```
+
+Dan objek pemetaan seperti ini:
+
+```ts
+pemetaan const = {
+  id: 'ID pengguna',
+  nama: 'Nama Pengguna',
+  usia: 'Usia pengguna',
+} sebagai konstanta;
+```
+
+Tugas Anda adalah mengubah objek pengguna menjadi struktur target berikut:
+
+```ts
+const transformUser = {
+  nomor identitas: 123,
+  nama: 'JohnDoe',
+  usia: 30,
+};
+```
+
+```ts
+// tolong jadikan fungsi generik mapObjectProperties yang menggunakan dua argumen (sumber dan objek pemetaan)
+// Kiat:
+// Anda telah mempelajari cara mengimplementasikan tipe yang dipetakan di kelas, Anda dapat menggunakannya sebagai tipe kembalian dari fungsi tersebut
+// Anda dapat menghapus pengubah readonly dari tipe yang dipetakan dengan menggunakan -readonly
+
+// mulai membuat kode di sini
+
+// ------- jangan ubah kode di bawah ini -------
+pengguna konstan = {
+  ID pengguna: 123,
+  nama pengguna: 'JohnDoe',
+  umur pengguna: 30,
+};
+
+pemetaan const1 = {
+  id: 'ID pengguna',
+  nama: 'Nama Pengguna',
+  usia: 'Usia pengguna',
+} sebagai konstanta;
+
+pemetaan const2 = {
+  id: 'ID pengguna',
+  nama: 'Nama Pengguna',
+} sebagai konstanta;
+
+pemetaan const3 = {
+  id: 'ID pengguna',
+  nama: 'Nama Pengguna',
+  usia: 'tidak ada',
+} sebagai konstanta;
+
+const transformUser1 = mapObjectProperties(pengguna, pemetaan1);
+// tipenya harus:
+// const transformUser1: {
+// id: nomor;
+// nama: rangkaian;
+// usia: nomor;
+// }
+
+const transformUser2 = mapObjectProperties(pengguna, pemetaan2);
+// tipenya harus:
+// const transformUser2: {
+// id: nomor;
+// nama: rangkaian;
+// Usia pengguna: nomor;
+// }
+
+const transformUser3 = mapObjectProperties(pengguna, pemetaan3); // akan menghasilkan kesalahan karena 'tidak ada' bukan kunci pengguna
+```
