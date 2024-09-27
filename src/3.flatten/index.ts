@@ -5,6 +5,9 @@
 // No need to use recursion
 
 // ------- start coding here -------
+type Transformer<T> = {
+  [O in keyof T[keyof T]]: T[keyof T][O]
+}
 
 // ------- don't change the code below -------
 type Details = {
