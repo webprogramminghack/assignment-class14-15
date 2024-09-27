@@ -5,11 +5,13 @@
 // No need to use recursion
 
 // ------- start coding here -------
-type Transformer<T extends Record<string, any>> = (
-  T extends any ? (x: T[keyof T]) => void : never
-) extends (x: infer R) => void
+type UnionToIntersection<U> = (U extends any ? (x: U) => void : never) extends (
+  x: infer R
+) => void
   ? R
   : never;
+
+type Transformer<T> = UnionToIntersection<T[keyof T]>;
 
 // ------- don't change the code below -------
 type Details = {
