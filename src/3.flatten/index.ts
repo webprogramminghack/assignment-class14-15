@@ -12,13 +12,6 @@ type UnionToIntersection<T> = (T extends any ? (x: T) => void : never) extends (
   : never;
 
 type Transformer<T> = UnionToIntersection<T[keyof T]>;
-// Result: { name: string; age: number }
-
-// type Transformer<T> = {
-//   [K in keyof T]: T[K] extends infer U ? {
-//     [P in keyof U]: U[P]
-//   } : never
-// }[keyof T]
 
 // ------- don't change the code below -------
 type Details = {
