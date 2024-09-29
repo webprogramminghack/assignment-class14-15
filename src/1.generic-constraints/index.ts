@@ -5,6 +5,26 @@
 
 // ------- start coding here -------
 
+function mapObjectProperties<T, M extends { [key: string]: keyof T }>(
+  source: T,
+  mapping: M
+): {
+  [K in keyof M]: M[K] extends keyof T ? T[M[K]] : never;
+} {
+  const result = {} as {
+    [K in keyof M]: M[K] extends keyof T ? T[M[K]] : never;
+  };
+
+  for (const key in mapping) {
+    const mappedKey = mapping[key];
+    if (mappedKey in source) {
+      result[key] = source[mappedKey];
+    }
+  }
+
+  return result;
+}
+
 // ------- don't change the code below -------
 const user = {
   userId: 123, // original key is userId

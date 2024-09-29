@@ -32,6 +32,24 @@ const items = [
 
 // ------- start coding here -------
 
+type Item = (typeof items)[number];
+
+type AvailableColors = 'red' | 'green' | 'blue';
+type AvailableCodes = '400' | '500' | '600';
+
+function getAvailableItems<C extends AvailableColors, K extends AvailableCodes>(
+  color: C,
+  code: K
+): Array<Item> {
+  const prefix = `text-${color}-${code}`;
+  const bgPrefix = `bg-${color}-${code}`;
+
+  const result: Item[] = items.filter(
+    (item) => item === prefix || item === bgPrefix
+  );
+  return result;
+}
+
 // ------- don't change the code below -------
 const item1 = getAvailableItems('red', '400'); // Should return ['text-red-400', 'bg-red-400']
 console.log(item1);
