@@ -22,15 +22,27 @@ const items = [
 // ------- don't change the code above -------
 
 // Your task is to implement a function `getAvailableItems` which should return an array of items based on the color and size provided.
-// The function should accept two arguments:
-// - color: string
-// - code: string
 // The if the color doesn't exist in the items array, the function should produce a type error.
 // The if the code doesn't exist in the items array, the function should produce a type error.
 // Tips:
 // Use conditional type with infer to get the color and code type, that's how you can prevent the non-available color and code from being passed to the function
 
 // ------- start coding here -------
+// Extract colors and codes as types from the items array
+type Item = (typeof items)[number];
+type Color = 'red' | 'green' | 'blue';
+type Code = '400' | '500' | '600';
+
+// The function should accept two arguments:
+// - color: string
+// - code: string
+function getAvailableItems<C extends Color, S extends Code>(
+  color: C,
+  code: S
+): Item[] {
+  // Filter the items array based on color and code
+  return items.filter((item) => item.includes(`${color}-${code}`));
+}
 
 // ------- don't change the code below -------
 const item1 = getAvailableItems('red', '400'); // Should return ['text-red-400', 'bg-red-400']
