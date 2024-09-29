@@ -6,6 +6,12 @@
 
 // ------- start coding here -------
 
+type Transformer<T> = {
+  [K in keyof T]: T[K] extends Record<string, infer U> ? U : never;
+}[keyof T] extends infer R
+  ? { [K in keyof R]: R[K] }
+  : never;
+
 // ------- don't change the code below -------
 type Details = {
   person: {
