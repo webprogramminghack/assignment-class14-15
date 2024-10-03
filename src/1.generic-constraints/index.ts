@@ -12,9 +12,9 @@ function mapObjectProperties<
   S extends Record<string, any>,
   M extends { [K in keyof M]: keyof S }
 >(source: S, mapping: M): Mapping<S, M> {
-  const result = {};
+  const result = { ...source } as any;
   for (let x in mapping) {
-    result[x] = source[mapping[x]];
+    result[x] = result[mapping[x]];
   }
 }
 
