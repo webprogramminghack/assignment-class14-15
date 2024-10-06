@@ -4,6 +4,19 @@
 // You can remove the readonly modifier from the mapped type by using -readonly
 
 // ------- start coding here -------
+function mapObjectProperties<
+  S,
+  M extends { [K in keyof M]: keyof S }
+>(source: S, mapping: M): { -readonly [K in keyof M]: S[M[K]] } {
+  const result = {} as { [K in keyof M]: S[M[K]] };
+  
+  for (const key in mapping) {
+    const sourceKey = mapping[key];
+    result[key] = source[sourceKey];
+  }
+  
+  return result;
+}
 
 // ------- don't change the code below -------
 const user = {

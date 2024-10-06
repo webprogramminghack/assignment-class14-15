@@ -4,7 +4,10 @@
 // Once you have the union type, you can intersect it to get the final type using conditional type with infer
 // No need to use recursion
 
-// ------- start coding here -------
+  // ------- start coding here -------
+  type Transformer<T extends Record<string, any>> =  {
+    [P in keyof T as T[P]]: T[P] extends infer U ? U extends Record<string, any> ? U : never : never;
+  };
 
 // ------- don't change the code below -------
 type Details = {
