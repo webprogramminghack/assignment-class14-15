@@ -16,6 +16,7 @@ function mapObjectProperties<
   for (let x in mapping) {
     result[x] = result[mapping[x]];
   }
+  return result;
 }
 
 // ------- don't change the code below -------
