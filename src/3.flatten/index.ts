@@ -5,6 +5,13 @@
 // No need to use recursion
 
 // ------- start coding here -------
+type UnionToIntersection<T> = (T extends any ? (x: T) => void : never) extends (
+  x: infer R
+) => void
+  ? R
+  : never;
+
+type Transformer<T> = UnionToIntersection<T[keyof T]>;
 
 // ------- don't change the code below -------
 type Details = {
